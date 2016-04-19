@@ -1,0 +1,31 @@
+{
+  "name": "crowdsource",
+  "version": "1.0.0",
+  "description": "Crowd Polling in Real Time",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danjwinter/crowdsource.git"
+  },
+  "keywords": [
+    "crowd",
+    "source",
+    "realtime",
+    "websockets"
+  ],
+  "author": "Dan Winter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danjwinter/crowdsource/issues"
+  },
+  "homepage": "https://github.com/danjwinter/crowdsource#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}
