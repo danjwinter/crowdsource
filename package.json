@@ -23,7 +23,9 @@
   },
   "homepage": "https://github.com/danjwinter/crowdsource#readme",
   "dependencies": {
-    "express": "^4.13.4"
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jade": "^1.11.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
