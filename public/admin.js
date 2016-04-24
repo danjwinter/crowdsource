@@ -5,7 +5,7 @@ var pollStatus = document.querySelector('#poll-status');
 var currentId = window.location.href.split("admin/")[1];
 
 closePoll.addEventListener('click', function () {
-  socket.send('closePoll', currentId);
+  socket.send('closePoll', {id: currentId});
 });
 
 socket.on('pollClosed', function(message) {

@@ -83,6 +83,8 @@ io.on('connection', function(socket) {
       }
     }
     if (channel === "closePoll") {
+      survey.pollOpen = false;
+      setSurvey(survey.id, survey, app);
       io.emit('pollClosed', message);
     }
   });

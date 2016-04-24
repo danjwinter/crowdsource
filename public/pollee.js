@@ -14,15 +14,15 @@ for (var i = 0; i < buttons.length; i++) {
 }
 
 for (var i = 0; i < buttons.length; i++) {
-  choices = choices + `${i + 1}:` + buttons[i].innerText;
+  choices = choices + `${buttons[i].innerText}\n`;
 }
 
 function closeThisPoll() {
   buttonArea.innerText = `Sorry, this survey has been closed. The choices were\n${choices}`;
 }
 
-socket.on('pollClosed', function (id) {
-  if (currentId == id) {
+socket.on('pollClosed', function (message) {
+  if (currentId == message.id) {
     closeThisPoll();
   }
 });
