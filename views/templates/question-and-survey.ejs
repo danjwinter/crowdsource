@@ -1,0 +1,12 @@
+<div id="question">
+  <%= locals.survey.question %>
+</div>
+<div id="choices">
+<% if (locals.survey.pollOpen) { %>
+  <% for (var i=0; i < locals.survey.responses.length; i++) { %>
+    <button><%= locals.survey.responses[i] %></button>
+  <% } %>
+<% } else { %>
+  Sorry, this poll has been closed.
+<% } %>
+</div>
