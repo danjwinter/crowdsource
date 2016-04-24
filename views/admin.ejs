@@ -1,8 +1,11 @@
 <% include ./templates/results %>
 <div id="poll-status">
-  <% if (locals.survey.closeTime === "") { %>
-    <button id="close-poll">Close Survey</button>
-    <% } %>
+  <% if (locals.survey.closeTimer !== "") { %>
+    This poll is set to close at <%= locals.survey.actualCloseTime %>
+  <% } %>
+
+  <button id="close-poll">Close Survey</button>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/admin.js"></script>
+<script src="/results.js"></script>

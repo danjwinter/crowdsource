@@ -48,9 +48,9 @@ app.post('/', function(request, response) {
   var adminLink = `/admin/${survey.id}`;
   var surveyLink = `/survey/${survey.id}`;
 
-  if (survey.closeTime !== "") {
+  if (survey.closeTimer !== "") {
 
-    setTimeout(closeThatPoll.bind(survey), parseInt(survey.closeTime));
+    setTimeout(closeThatPoll.bind(survey), survey.closeTimer);
   }
   response.locals = {question: survey.question, admin: adminLink, survey: surveyLink};
   response.render('survey-links');
@@ -77,7 +77,6 @@ io.on('connection', function(socket) {
           survey.results[survey.responses[i]] = updatedResult;
         }
         survey.results[message.vote].push(message.socketId);
-        console.log(currentResultText(survey.results));
         survey.resultText = currentResultText(survey.results);
         setSurvey(survey.id, survey, app);
         io.emit('results', {id: survey.id, resultText: survey.resultText});
