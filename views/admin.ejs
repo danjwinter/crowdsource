@@ -1,7 +1,8 @@
-Results:
-<div class="results"></div>
-<% if (locals.survey.closeTime === "") { %>
-  <button id="close-poll">Close Survey</button>
-<% } %>
+<% include ./templates/results %>
+<div id="poll-status">
+  <% if (locals.survey.closeTime === "") { %>
+    <button id="close-poll">Close Survey</button>
+    <% } %>
+</div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/admin.js"></script>

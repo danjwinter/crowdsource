@@ -1,22 +1,7 @@
-<div id="question">
-  <%= locals.survey.question %>
-</div>
+<% include ./templates/question-and-survey %>
 
-<div id="choices">
-  <% if(locals.survey.responses[0]) { %>
-    <button data-id=<%= locals.survey.id %>><%= locals.survey.responses[0] %></button>
-  <% } %>
-  <% if(locals.survey.responses[1]) { %>
-    <button><%= locals.survey.responses[1] %></button>
-  <% } %>
-  <% if(locals.survey.responses[2]) { %>
-    <button><%= locals.survey.responses[2] %></button>
-  <% } %>
-  <% if(locals.survey.responses[3]) { %>
-    <button><%= locals.survey.responses[3] %></button>
-  <% } %>
-</div>
+<% include ./templates/your-vote %>
 
 <!-- Make sure your JS is at the bottom of the body! -->
 <script src="/socket.io/socket.io.js"></script>
-<script src="/client.js"></script>
+<script src="/pollee.js"></script>

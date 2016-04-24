@@ -56,13 +56,6 @@ app.post('/', function(request, response) {
   response.render('survey-links');
 });
 
-
-// if (!module.parent) {
-//   app.listen(app.get('port'), () => {
-//     console.log(`${app.locals.title} is running on ${app.get('port')}.`);
-//   });
-// }
-
 var port = process.env.PORT || app.get('port');
 
 var server = http.createServer(app)
@@ -74,8 +67,6 @@ const socketIo = require('socket.io');
 const io = socketIo(server);
 
 io.on('connection', function(socket) {
-  console.log('A user has connected', io.engine.clientsCount);
-
   socket.on('message', function (channel, message) {
     var survey = getSurvey(message.id, app);
     if (channel === "voteCast") {
@@ -93,13 +84,11 @@ io.on('connection', function(socket) {
       }
     }
     if (channel === "closePoll") {
-      console.log('received poll closed', message);
       io.emit('pollClosed', message);
     }
   });
 
   socket.on('disconnect', function() {
-    console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 });

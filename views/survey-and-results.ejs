@@ -1,20 +1,10 @@
-<div id="question">
-  <%= locals.survey.question %>
-</div>
-<div id="choices">
-<% if (locals.survey.pollOpen) { %>
-  <% for (var i=0; i < locals.survey.responses.length; i++) { %>
-    <button><%= locals.survey.responses[i] %></button>
-  <% } %>
-<% } else { %>
-  Sorry, this poll has been closed.
-<% } %>
-</div>
+<% include ./templates/question-and-survey %>
 
-Results:
-<div class="results">
-  <%= locals.survey.resultText %>
-</div>
+<% include ./templates/results %>
+
+<% include ./templates/your-vote %>
+
 <!-- Make sure your JS is at the bottom of the body! -->
 <script src="/socket.io/socket.io.js"></script>
-<script src="/client.js"></script>
+<script src="/pollee.js"></script>
+<script src="/results.js"></script>
