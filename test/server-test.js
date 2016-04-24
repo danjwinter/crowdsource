@@ -34,23 +34,25 @@ describe('Server', () => {
     });
   });
 
-  // describe('GET /', () => {
-  //   it('should return a 200', (done) => {
-  //     this.request.get('/', (error, response) => {
-  //       if (error) { done(error); }
-  //       assert.equal(response.statusCode, 200);
-  //       done();
-  //     });
-  //   });
+  describe('GET /', function(){
+    it('responds with success', function(done){
+      var title = app.locals.title;
+      request(app)
+        .get('/')
+        .assert(response.body.includes(title),
+               `"${response.body}" does not include "${title}".`);
+        done();
+    });
+  });
 
     // it('should have a body with the name of the application', (done) => {
     //   var title = app.locals.title;
     //
     //   this.request.get('/', (error, response) => {
     //     if (error) { done(error); }
-    //     assert(response.body.includes(title),
-    //            `"${response.body}" does not include "${title}".`);
-    //     done();
+        // assert(response.body.includes(title),
+        //        `"${response.body}" does not include "${title}".`);
+        // done();
     //   });
     // });
     //
