@@ -28,6 +28,13 @@ app.get('/survey/:id', (request, response) => {
   }
 });
 
+app.get('/admin/:id', (request, response) => {
+  var id = request.params.id;
+  var survey = getSurvey(id, app);
+  response.locals = { survey: survey };
+  response.render('admin');
+});
+
 app.post('/', function(request, response) {
   var survey = createSurvey(request.body, app);
   var adminLink = `/admin/${survey.id}`;
@@ -56,15 +63,21 @@ io.on('connection', function(socket) {
   console.log('A user has connected', io.engine.clientsCount);
 
   socket.on('message', function (channel, message) {
-    if (channel == "voteCast") {
-      var survey = getSurvey(message.id, app);
-      for (var i=0; i < survey.responses.length; i++) {
-        currentResult = survey.results[survey.responses[i]];
-        updatedResult = currentResult.filter(id => id !== message.socketId);
-        survey.results[survey.responses[i]] = updatedResult;
+    var survey = getSurvey(message.id, app);
+    if (channel === "voteCast") {
+      if (survey.pollOpen) {
+        for (var i=0; i < survey.responses.length; i++) {
+          currentResult = survey.results[survey.responses[i]];
+          updatedResult = currentResult.filter(id => id !== message.socketId);
+          survey.results[survey.responses[i]] = updatedResult;
+        }
+        survey.results[message.vote].push(message.socketId);
+        io.emit('results', {id: survey.id, results: survey.results});
       }
-      survey.results[message.vote].push(message.socketId);
-      io.sockets.emit('results', survey.results);
+    }
+    if (channel === "closePoll") {
+      console.log('received poll closed', message);
+      io.emit('pollClosed', message);
     }
   });
 

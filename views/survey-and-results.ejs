@@ -4,7 +4,7 @@
 
 <div id="choices">
   <% if(locals.survey.responses[0]) { %>
-    <button data-id=<%= locals.survey.id %>><%= locals.survey.responses[0] %></button>
+    <button><%= locals.survey.responses[0] %></button>
   <% } %>
   <% if(locals.survey.responses[1]) { %>
     <button><%= locals.survey.responses[1] %></button>

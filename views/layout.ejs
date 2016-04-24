@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -10,6 +9,10 @@
   <body>
     <%- body %>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/views/client.js"></script>
+    <% if (window.location.href.includes('admin')) { %>
+    <script src="/views/admin.js"></script>
+    <% } else { %>
+      <script src="/views/client.js"></script>
+    <% } %>
   </body>
-</html>
+</html> -->
