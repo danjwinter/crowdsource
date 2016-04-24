@@ -4,12 +4,21 @@
 
 <div id="choices">
   <% if(locals.survey.responses[0]) { %>
-    <button><%= locals.survey.responses[0] %></button>
+    <button data-id=<%= locals.survey.id %>><%= locals.survey.responses[0] %></button>
   <% } %>
-  <button>B</button>
-  <button>C</button>
-  <button>D</button>
+  <% if(locals.survey.responses[1]) { %>
+    <button><%= locals.survey.responses[1] %></button>
+  <% } %>
+  <% if(locals.survey.responses[2]) { %>
+    <button><%= locals.survey.responses[2] %></button>
+  <% } %>
+  <% if(locals.survey.responses[3]) { %>
+    <button><%= locals.survey.responses[3] %></button>
+  <% } %>
 </div>
+
+Results:
+<div class="results"></div>
 <!-- Make sure your JS is at the bottom of the body! -->
 <script src="/socket.io/socket.io.js"></script>
 <script src="/client.js"></script>
