@@ -1,24 +1,30 @@
 <div id="question">
   <%= locals.survey.question %>
 </div>
-
 <div id="choices">
+<% if (locals.survey.pollOpen) { %>
   <% if(locals.survey.responses[0]) { %>
     <button><%= locals.survey.responses[0] %></button>
-  <% } %>
-  <% if(locals.survey.responses[1]) { %>
-    <button><%= locals.survey.responses[1] %></button>
-  <% } %>
-  <% if(locals.survey.responses[2]) { %>
-    <button><%= locals.survey.responses[2] %></button>
-  <% } %>
-  <% if(locals.survey.responses[3]) { %>
-    <button><%= locals.survey.responses[3] %></button>
-  <% } %>
+    <% } %>
+    <% if(locals.survey.responses[1]) { %>
+      <button><%= locals.survey.responses[1] %></button>
+      <% } %>
+      <% if(locals.survey.responses[2]) { %>
+        <button><%= locals.survey.responses[2] %></button>
+        <% } %>
+        <% if(locals.survey.responses[3]) { %>
+          <button><%= locals.survey.responses[3] %></button>
+          <% } %>
+
+<% } else { %>
+  Sorry, this poll has been closed.
+<% } %>
 </div>
 
 Results:
-<div class="results"></div>
+<div class="results">
+  <%= locals.survey.resultText %>
+</div>
 <!-- Make sure your JS is at the bottom of the body! -->
 <script src="/socket.io/socket.io.js"></script>
 <script src="/client.js"></script>

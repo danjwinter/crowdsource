@@ -5,6 +5,9 @@ app.set('view engine', 'ejs');
 const bodyParser = require('body-parser');
 const createSurvey = require('./lib/create-survey');
 const getSurvey = require('./lib/get-survey');
+const setSurvey = require('./lib/set-survey');
+const currentResultText = require('./lib/current-result-text');
+
 app.use(bodyParser());
 app.use(express.static('public'));
 app.set('port', process.env.PORT || 3000);
@@ -27,6 +30,11 @@ app.get('/survey/:id', (request, response) => {
     response.render('survey-only');
   }
 });
+var closeThatPoll = function() {
+  this.pollOpen = false;
+  setSurvey(this.id, this, app);
+  io.emit("pollClosed", this.id);
+};
 
 app.get('/admin/:id', (request, response) => {
   var id = request.params.id;
@@ -39,9 +47,15 @@ app.post('/', function(request, response) {
   var survey = createSurvey(request.body, app);
   var adminLink = `/admin/${survey.id}`;
   var surveyLink = `/survey/${survey.id}`;
+
+  if (survey.closeTime !== "") {
+
+    setTimeout(closeThatPoll.bind(survey), parseInt(survey.closeTime));
+  }
   response.locals = {question: survey.question, admin: adminLink, survey: surveyLink};
   response.render('survey-links');
 });
+
 
 // if (!module.parent) {
 //   app.listen(app.get('port'), () => {
@@ -72,7 +86,10 @@ io.on('connection', function(socket) {
           survey.results[survey.responses[i]] = updatedResult;
         }
         survey.results[message.vote].push(message.socketId);
-        io.emit('results', {id: survey.id, results: survey.results});
+        console.log(currentResultText(survey.results));
+        survey.resultText = currentResultText(survey.results);
+        setSurvey(survey.id, survey, app);
+        io.emit('results', {id: survey.id, resultText: survey.resultText});
       }
     }
     if (channel === "closePoll") {
@@ -86,6 +103,16 @@ io.on('connection', function(socket) {
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 });
+
+// function resultText(results) {
+//   resultText = "";
+//   for (var key in results) {
+//     if (results.hasOwnProperty(key)) {
+//       resultText = `${resultText} ${key}: ${results[key].length}`;
+//     }
+//   }
+//   return resultText;
+// }
 
 module.exports = app;
 module.exports = server;
