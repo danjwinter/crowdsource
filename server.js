@@ -20,10 +20,13 @@ app.get('/', (request, response) => {
   response.render('index');
 });
 
+var counter = 0;
+
 app.get('/survey/:id', (request, response) => {
   var id = request.params.id;
   var survey = getSurvey(id, app);
   response.locals = { survey: survey };
+  console.log(survey, ++counter);
   if(survey.polleesSeeResults) {
     response.render('survey-and-results');
   } else {
