@@ -1,0 +1,15 @@
+<div id="question">
+  <%= locals.survey.question %>
+</div>
+
+<div id="choices">
+  <% if(locals.survey.responses[0]) { %>
+    <button><%= locals.survey.responses[0] %></button>
+  <% } %>
+  <button>B</button>
+  <button>C</button>
+  <button>D</button>
+</div>
+<!-- Make sure your JS is at the bottom of the body! -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="/client.js"></script>

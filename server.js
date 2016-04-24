@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 const bodyParser = require('body-parser');
 const createSurvey = require('./lib/create-survey');
 const getSurvey = require('./lib/get-survey');
@@ -29,8 +29,8 @@ app.get('/survey/:id', (request, response) => {
 
 app.post('/', function(request, response) {
   var survey = createSurvey(request.body, app);
-  var adminLink = `/survey/${survey.id}`;
-  var surveyLink = `/admin/${survey.id}`;
+  var adminLink = `/admin/${survey.id}`;
+  var surveyLink = `/survey/${survey.id}`;
   response.locals = {question: survey.question, admin: adminLink, survey: surveyLink};
   response.render('survey-links');
 });
