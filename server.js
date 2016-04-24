@@ -30,11 +30,12 @@ app.get('/survey/:id', (request, response) => {
     response.render('survey-only');
   }
 });
-var closeThatPoll = function() {
+
+function closeThatPoll() {
   this.pollOpen = false;
   setSurvey(this.id, this, app);
   io.emit("pollClosed", this.id);
-};
+}
 
 app.get('/admin/:id', (request, response) => {
   var id = request.params.id;
@@ -47,7 +48,8 @@ app.post('/', function(request, response) {
   var survey = createSurvey(request.body, app);
   var adminLink = `/admin/${survey.id}`;
   var surveyLink = `/survey/${survey.id}`;
-
+  console.log("body", request.body);
+  console.log("survey", survey);
   if (survey.closeTimer !== "") {
 
     setTimeout(closeThatPoll.bind(survey), survey.closeTimer);
@@ -79,11 +81,7 @@ io.on('connection', function(socket) {
       io.emit('pollClosed', message);
     }
   });
-
-  socket.on('disconnect', function() {
-    io.sockets.emit('usersConnected', io.engine.clientsCount);
-  });
 });
 
 module.exports = app;
-module.exports = server;
+// module.exports = server;

@@ -1,6 +1,4 @@
-<div id="question">
-  <%= locals.survey.question %>
-</div>
+<% include ./question %>
 <div id="choices">
 <% if (locals.survey.pollOpen) { %>
   <% for (var i=0; i < locals.survey.responses.length; i++) { %>
