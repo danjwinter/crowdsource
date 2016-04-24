@@ -64,7 +64,7 @@ io.on('connection', function(socket) {
         survey.results[survey.responses[i]] = updatedResult;
       }
       survey.results[message.vote].push(message.socketId);
-      console.log(survey);
+      io.sockets.emit('results', survey.results);
     }
   });
 
