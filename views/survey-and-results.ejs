@@ -3,19 +3,9 @@
 </div>
 <div id="choices">
 <% if (locals.survey.pollOpen) { %>
-  <% if(locals.survey.responses[0]) { %>
-    <button><%= locals.survey.responses[0] %></button>
-    <% } %>
-    <% if(locals.survey.responses[1]) { %>
-      <button><%= locals.survey.responses[1] %></button>
-      <% } %>
-      <% if(locals.survey.responses[2]) { %>
-        <button><%= locals.survey.responses[2] %></button>
-        <% } %>
-        <% if(locals.survey.responses[3]) { %>
-          <button><%= locals.survey.responses[3] %></button>
-          <% } %>
-
+  <% for (var i=0; i < locals.survey.responses.length; i++) { %>
+    <button><%= locals.survey.responses[i] %></button>
+  <% } %>
 <% } else { %>
   Sorry, this poll has been closed.
 <% } %>

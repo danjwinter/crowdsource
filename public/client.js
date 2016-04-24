@@ -17,20 +17,12 @@ function closeThisPoll() {
 }
 
 socket.on('pollClosed', function (id) {
-  console.log("received poll closed", currentId === id)
   if (currentId == id) {
     closeThisPoll();
   }
 });
 
 function showResults(message) {
-  // var survey = message.results;
-  // resultText = "";
-  // for (var key in survey) {
-  //   if (survey.hasOwnProperty(key)) {
-  //     resultText = `${resultText} ${key}: ${survey[key].length}`;
-  //   }
-  // }
   results.innerText = message.resultText;
 }
 

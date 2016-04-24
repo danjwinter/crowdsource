@@ -104,15 +104,5 @@ io.on('connection', function(socket) {
   });
 });
 
-// function resultText(results) {
-//   resultText = "";
-//   for (var key in results) {
-//     if (results.hasOwnProperty(key)) {
-//       resultText = `${resultText} ${key}: ${results[key].length}`;
-//     }
-//   }
-//   return resultText;
-// }
-
 module.exports = app;
 module.exports = server;
