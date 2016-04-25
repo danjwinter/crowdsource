@@ -7,10 +7,12 @@ var yourVote = document.querySelector('#your-vote');
 var choices = "";
 
 for (var i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener('click', function () {
-    socket.send('voteCast', {id: currentId, vote: this.innerText, socketId: socket.id});
-    yourVote.innerText = `Your vote: ${this.innerText}`;
-  });
+  buttons[i].addEventListener('click', sendVoteCast);
+}
+
+function sendVoteCast() {
+  socket.send('voteCast', {id: currentId, vote: this.innerText, socketId: socket.id});
+  yourVote.innerText = `Your vote: ${this.innerText}`;
 }
 
 for (var i = 0; i < buttons.length; i++) {
@@ -18,6 +20,9 @@ for (var i = 0; i < buttons.length; i++) {
 }
 
 function closeThisPoll() {
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].removeEventListener('click', sendVoteCast);
+  }
   buttonArea.innerText = `Sorry, this survey has been closed. The choices were\n${choices}`;
 }
 
