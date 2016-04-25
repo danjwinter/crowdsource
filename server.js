@@ -48,10 +48,7 @@ app.post('/', function(request, response) {
   var survey = createSurvey(request.body, app);
   var adminLink = `/admin/${survey.id}`;
   var surveyLink = `/survey/${survey.id}`;
-  console.log("body", request.body);
-  console.log("survey", survey);
   if (survey.closeTimer !== "") {
-
     setTimeout(closeThatPoll.bind(survey), survey.closeTimer);
   }
   response.locals = {question: survey.question, admin: adminLink, survey: surveyLink};
@@ -84,4 +81,3 @@ io.on('connection', function(socket) {
 });
 
 module.exports = app;
-// module.exports = server;

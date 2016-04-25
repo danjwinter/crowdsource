@@ -28,7 +28,7 @@ describe('.createSurvey', () => {
                            polleesSeeResults: 'true',
                            id: 1,
                            results: { Red: [], Blue: [], Green: [] },
-                           resultText: ' Red: 0 Blue: 0 Green: 0',
+                           resultText: 'Red: 0 Blue: 0 Green: 0 ',
                            pollOpen: true };
 
     var survey = createSurvey(sampleBody, app);

@@ -66,7 +66,7 @@ describe('Server', () => {
   });
 
   describe('GET /admin/:id', function(){
-    it('responds with question form', function(done){
+    it('responds with results and option to close survey', function(done){
      app.locals.surveys['1'] = { question: 'What is your favorite color?',
   responses: [ 'Red', 'Blue', 'Green' ],
   closeTimer: '',
