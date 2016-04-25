@@ -12,7 +12,7 @@ describe('.setSurvey', () => {
     app.locals.surveys = {};
   });
 
-  it('should get the correct survey', () => {
+  it('should set the correct survey', () => {
     var sampleSurvey = {survey: "sample survey"};
     setSurvey('1', sampleSurvey, app);
     var actualSurveys = app.locals.surveys;

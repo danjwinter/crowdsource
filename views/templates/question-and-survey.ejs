@@ -1,8 +1,8 @@
 <% include ./question %>
 <div id="choices">
 <% if (locals.survey.pollOpen) { %>
-  <% for (var i=0; i < locals.survey.responses.length; i++) { %>
-    <button><%= locals.survey.responses[i] %></button>
+  <% for (var i=0; i < Object.keys(locals.survey.results).length; i++) { %>
+    <button><%= Object.keys(locals.survey.results)[i] %></button>
   <% } %>
 <% } else { %>
   Sorry, this poll has been closed.

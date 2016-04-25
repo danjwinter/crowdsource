@@ -35,4 +35,29 @@ describe('.createSurvey', () => {
     assert.deepEqual(survey, expectedSurvey);
     assert.deepEqual(app.locals.surveys, {'1': expectedSurvey});
   });
+
+  it('should create a survey with only unique results', () => {
+    app.locals.id = 0;
+    var sampleBody = { question: 'What is your favorite color?',
+                       firstResponse: 'Red',
+                       secondResponse: 'Blue',
+                       thirdResponse: 'Green',
+                       fourthResponse: 'Green',
+                       polleesSeeResults: 'true',
+                       closeTimer: '' };
+
+    var expectedSurvey = { question: 'What is your favorite color?',
+                           responses: [ 'Red', 'Blue', 'Green', 'Green' ],
+                           closeTimer: '',
+                           actualCloseTime: '',
+                           polleesSeeResults: 'true',
+                           id: 1,
+                           results: { Red: [], Blue: [], Green: [] },
+                           resultText: 'Red: 0 Blue: 0 Green: 0 ',
+                           pollOpen: true };
+
+    var survey = createSurvey(sampleBody, app);
+    assert.deepEqual(survey, expectedSurvey);
+    assert.deepEqual(app.locals.surveys, {'1': expectedSurvey});
+  });
 });

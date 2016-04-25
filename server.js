@@ -70,7 +70,6 @@ io.on('connection', function(socket) {
     var survey = getSurvey(message.id, app);
     if (channel === "voteCast") {
       survey = updateResults(survey, message, app);
-      console.log(survey);
       io.emit('results', {id: survey.id, resultText: survey.resultText});
     }
     if (channel === "closePoll") {
