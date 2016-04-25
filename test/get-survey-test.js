@@ -3,7 +3,7 @@ const app = require('../server');
 const chai = require('chai');
 const assert = chai.assert;
 
-describe('.currentResultText', () => {
+describe('.getSurvey', () => {
   before(() => {
     app.locals.surveys = {};
   });
@@ -11,7 +11,7 @@ describe('.currentResultText', () => {
   after(() => {
     app.locals.surveys = {};
   });
-  
+
   it('should get the correct survey', () => {
     var sampleSurvey = {survey: "sample survey"};
     app.locals.surveys['1'] = sampleSurvey;

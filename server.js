@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const createSurvey = require('./lib/create-survey');
 const getSurvey = require('./lib/get-survey');
 const setSurvey = require('./lib/set-survey');
-const updateVotes = require('./lib/update-results');
+const updateResults = require('./lib/update-results');
 
 app.use(bodyParser());
 app.use(express.static('public'));
@@ -69,7 +69,8 @@ io.on('connection', function(socket) {
   socket.on('message', function (channel, message) {
     var survey = getSurvey(message.id, app);
     if (channel === "voteCast") {
-      survey = updateVotes(survey, message, app);
+      survey = updateResults(survey, message, app);
+      console.log(survey);
       io.emit('results', {id: survey.id, resultText: survey.resultText});
     }
     if (channel === "closePoll") {
